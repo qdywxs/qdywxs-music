@@ -2,11 +2,13 @@ console.log("Hello, Oli")
 
 import "./icons.js"
 
-import './icons.js'
+import Swiper from "./swiper.js"
+
+
 
 class Player {
   constructor(node) {
-    this.root = typeof node === 'string' ? document.querySelector(node) : node
+    this.root = typeof node === "string" ? document.querySelector(node) : node
     
     this.$ = selector => this.root.querySelector(selector)
     this.$$ = selector => this.root.querySelectorAll(selector)
@@ -40,13 +42,19 @@ class Player {
     let songObj = this.songList[this.currentIndex]  /*4️⃣-①：“缓存”当前播放歌曲的所有“数据”信息，
                                                     并赋值给 songObj；*/
     this.audio.src = songObj.url
+
+    this.$(".header h1").innerText = songObj.title
+    this.$(".header p").innerText = songObj.author + "-" + songObj.album
+
+    this.audio.onloadedmetadata = () => this.$('.time-end').innerText = this.formateTime(this.audio.duration)
     
+    this.loadLyric() 
   }
 
 
   bind() {
     let self = this
-    this.root.querySelector(".btn-play-pause").onclick = function() {
+    this.$(".btn-play-pause").onclick = function() {
       if(this.classList.contains("playing")) {
         self.audio.pause()  //把音乐暂停掉
         
@@ -66,14 +74,14 @@ class Player {
 
     }
 
-    this.root.querySelector(".btn-pre").onclick = function() {
+    this.$(".btn-pre").onclick = function() {
       console.log("pre")
       self.currentIndex = (self.currentIndex - 1 + self.songList.length) % self.songList.length
       self.loadSong()
       self.playSong()
     }
 
-    this.root.querySelector(".btn-next").onclick = function() {
+    this.$(".btn-next").onclick = function() {
       console.log("next")
       self.currentIndex = (self.currentIndex + 1) % self.songList.length
       self.loadSong()
@@ -82,6 +90,21 @@ class Player {
 
 
 
+    let swiper = new Swiper(this.$(".panels"))
+    
+    swiper.on("swipLeft", function() {
+      this.classList.remove("panel1")
+      this.classList.add("panel2")
+      console.log("left")
+    })
+
+
+    swiper.on("swipRight", function() {
+      this.classList.remove("panel2")
+      this.classList.add("panel1")
+      console.log("right")
+    })
+
   }
 
 
@@ -89,6 +112,45 @@ class Player {
   playSong() {
     this.audio.oncanplaythrough = () => this.audio.play()
   }
+
+
+  loadLyric() {
+    fetch(this.songList[this.currentIndex].lyric)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.lrc.lyric)
+
+        this.setLyrics(data.lrc.lyric)
+
+        window.lyrics = data.lrc.lyric
+      })
+  }
+
+
+
+
+  setLyricToCenter(node) {
+    console.log(node)
+    let translateY = node.offsetTop - this.$(".panel-lyrics").offsetHeight / 2
+    translateY = translateY > 0 ? translateY : 0
+    this.$(".panel-lyrics .container").style.transform = `translateY(-${translateY}px)`
+    this.$$(".panel-lyrics p").forEach(node => node.classList.remove("current"))
+    node.classList.add("current")
+  }
+
+
+
+  setLyrics() {
+
+  }
+
+
+
+  formateTime() {
+
+  }
+
+
 
 }
 
