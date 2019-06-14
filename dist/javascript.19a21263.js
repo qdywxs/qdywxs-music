@@ -245,6 +245,8 @@ function () {
     this.audio = new Audio();
     this.start();
     this.bind();
+    this.lyricsArr = [];
+    this.lyricIndex = -1;
   }
 
   _createClass(Player, [{
@@ -332,6 +334,14 @@ function () {
         this.classList.add("panel1");
         console.log("right");
       });
+      /*❗️音乐播放的过程中，播放器会时刻地触发方法 ontimeupdate 。
+      触发这个方法的时候，我们调用 locateLyric 和 setProgerssBar 方法，
+      去相应地时刻“定位歌词”和设置“进度条”。*/
+
+      this.audio.ontimeupdate = function () {
+        self.locateLyric();
+        self.setProgressBar();
+      };
     }
   }, {
     key: "playSong",
@@ -358,6 +368,55 @@ function () {
       });
     }
   }, {
+    key: "setLyrics",
+    value: function setLyrics(lyrics) {
+      this.lyricIndex = 0;
+      var fragment = document.createDocumentFragment();
+      var lyricsArr = [];
+      this.lyricsArr = lyricsArr;
+      lyrics.split(/\n/).filter(function (str) {
+        return str.match(/\[.+?\]/);
+      }).forEach(function (line) {
+        var str = line.replace(/\[.+?\]/g, "");
+        line.match(/\[.+?\]/g).forEach(function (t) {
+          t = t.replace(/[\[\]]/g, "");
+          var milliseconds = parseInt(t.slice(0, 2)) * 60 * 1000 + parseInt(t.slice(3, 5)) * 1000 + parseInt(t.slice(6));
+          lyricsArr.push([milliseconds, str]);
+        });
+      });
+      lyricsArr.filter(function (line) {
+        return line[1].trim() !== "";
+      }).sort(function (v1, v2) {
+        if (v1[0] > v2[0]) {
+          return 1;
+        } else {
+          return -1;
+        }
+      }).forEach(function (line) {
+        var node = document.createElement("p");
+        node.setAttribute("data-time", line[0]);
+        node.innerText = line[1];
+        fragment.appendChild(node);
+      });
+      this.$(".panel-lyrics .container").innerHTML = "";
+      this.$(".panel-lyrics .container").appendChild(fragment);
+    }
+  }, {
+    key: "locateLyric",
+    value: function locateLyric() {
+      console.log("locateLyric");
+      var currentTime = this.audio.currentTime * 1000;
+      var nextLineTime = this.lyricsArr[this.lyricIndex + 1][0];
+
+      if (currentTime > nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
+        this.lyricIndex++;
+        var node = this.$('[data-time="' + this.lyricsArr[this.lyricIndex][0] + '"]');
+        if (node) this.setLyricToCenter(node);
+        this.$$(".panel-effect .lyric p")[0].innerText = this.lyricsArr[this.lyricIndex][1];
+        this.$$(".panel-effect .lyric p")[1].innerText = this.lyricsArr[this.lyricIndex + 1] ? this.lyricsArr[this.lyricIndex + 1][1] : '';
+      }
+    }
+  }, {
     key: "setLyricToCenter",
     value: function setLyricToCenter(node) {
       console.log(node);
@@ -370,11 +429,24 @@ function () {
       node.classList.add("current");
     }
   }, {
-    key: "setLyrics",
-    value: function setLyrics() {}
+    key: "setProgressBar",
+    value: function setProgressBar() {
+      console.log("set setProgressBar");
+      var percent = this.audio.currentTime * 100 / this.audio.duration + "%";
+      console.log(percent);
+      this.$(".bar .progress").style.width = percent;
+      this.$(".time-start").innerText = this.formateTime(this.audio.currentTime);
+      console.log(this.$(".bar .progress").style.width);
+    }
   }, {
     key: "formateTime",
-    value: function formateTime() {}
+    value: function formateTime(secondsTotal) {
+      var minutes = parseInt(secondsTotal / 60);
+      minutes = minutes >= 10 ? "" + minutes : "0" + minutes;
+      var seconds = parseInt(secondsTotal % 60);
+      seconds = seconds >= 10 ? "" + seconds : "0" + seconds;
+      return minutes + ":" + seconds;
+    }
   }]);
 
   return Player;

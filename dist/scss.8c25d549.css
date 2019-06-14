@@ -175,7 +175,7 @@
   margin: 0 10px;
 }
 #player .footer .bar-area .bar .progress {
-  width: 6%;
+  width: 0%;
   transition: all 0.2s;
   height: 100%;
   /*❗️撑满父亲（因为 .bar 设置了高度 4px，所以这里可以直接 100%）*/

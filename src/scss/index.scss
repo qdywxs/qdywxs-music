@@ -198,7 +198,7 @@ $color3: #0025f1;
         margin: 0 10px;
         
         .progress {
-          width: 6%;
+          width: 0%;
           transition: all .2s;
           height: 100%;  /*❗️撑满父亲（因为 .bar 设置了高度 4px，所以这里可以直接 100%）*/
           border-radius: 2px;

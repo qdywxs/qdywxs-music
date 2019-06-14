@@ -21,6 +21,9 @@ class Player {
     this.start()
     this.bind()
 
+    this.lyricsArr = []
+    this.lyricIndex = -1    
+
   }
 
   
@@ -105,6 +108,17 @@ class Player {
       console.log("right")
     })
 
+
+
+    /*❗️音乐播放的过程中，播放器会时刻地触发方法 ontimeupdate 。
+    触发这个方法的时候，我们调用 locateLyric 和 setProgerssBar 方法，
+    去相应地时刻“定位歌词”和设置“进度条”。*/
+    this.audio.ontimeupdate = function() {
+
+      self.locateLyric()
+      self.setProgressBar()
+    }    
+
   }
 
 
@@ -118,6 +132,7 @@ class Player {
     fetch(this.songList[this.currentIndex].lyric)
       .then(res => res.json())
       .then(data => {
+        
         console.log(data.lrc.lyric)
 
         this.setLyrics(data.lrc.lyric)
@@ -128,31 +143,113 @@ class Player {
 
 
 
+  setLyrics(lyrics) {
+    this.lyricIndex = 0
+    let fragment = document.createDocumentFragment()
+    let lyricsArr  = []
+    this.lyricsArr = lyricsArr
+    lyrics.split(/\n/)
+      .filter(str => str.match(/\[.+?\]/))
+      .forEach(line => {
+        let str = line.replace(/\[.+?\]/g, "")
+        line.match(/\[.+?\]/g).forEach(t=>{
+          t = t.replace(/[\[\]]/g, "")
+          let milliseconds = parseInt(t.slice(0,2))*60*1000 + parseInt(t.slice(3,5))*1000 + parseInt(t.slice(6))
+          lyricsArr.push([milliseconds, str])
+        })
+      })
+
+      lyricsArr.filter(line => line[1].trim() !== "").sort((v1, v2) => {
+        if(v1[0] > v2[0]) {
+          return 1
+        } else {
+          return -1
+        }
+      }).forEach(line => {
+          let node = document.createElement("p")
+          node.setAttribute("data-time", line[0])
+          node.innerText = line[1]
+          fragment.appendChild(node)
+        })
+      this.$(".panel-lyrics .container").innerHTML = ""
+      this.$(".panel-lyrics .container").appendChild(fragment)
+  }
+
+
+
+  locateLyric() {
+    console.log("locateLyric")
+
+
+    let currentTime = this.audio.currentTime * 1000
+
+
+    let nextLineTime = this.lyricsArr[this.lyricIndex + 1][0]
+
+    if(currentTime > nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
+      this.lyricIndex++
+      
+      let node = this.$('[data-time="'+this.lyricsArr[this.lyricIndex][0]+'"]')
+      if(node) this.setLyricToCenter(node)
+
+
+      this.$$(".panel-effect .lyric p")[0].innerText = this.lyricsArr[this.lyricIndex][1]
+      this.$$(".panel-effect .lyric p")[1].innerText = this.lyricsArr[this.lyricIndex+1] ? this.lyricsArr[this.lyricIndex+1][1] : ''
+      
+    }
+  }
+
+
 
   setLyricToCenter(node) {
     console.log(node)
+
     let translateY = node.offsetTop - this.$(".panel-lyrics").offsetHeight / 2
     translateY = translateY > 0 ? translateY : 0
     this.$(".panel-lyrics .container").style.transform = `translateY(-${translateY}px)`
     this.$$(".panel-lyrics p").forEach(node => node.classList.remove("current"))
+    
     node.classList.add("current")
   }
 
 
 
-  setLyrics() {
 
+
+  setProgressBar() {
+    console.log("set setProgressBar")
+
+    let percent = (this.audio.currentTime * 100 /this.audio.duration) + "%"
+    
+    console.log(percent)
+
+    this.$(".bar .progress").style.width = percent
+
+    this.$(".time-start").innerText = this.formateTime(this.audio.currentTime)
+
+    console.log(this.$(".bar .progress").style.width)
   }
 
 
 
-  formateTime() {
 
+
+  formateTime(secondsTotal) {
+    let minutes = parseInt(secondsTotal/60)
+    minutes = minutes >= 10 ? "" + minutes : "0" + minutes
+    
+    let seconds = parseInt(secondsTotal%60)
+    seconds = seconds >= 10 ? "" + seconds : "0" + seconds
+    
+    return minutes + ":" + seconds
   }
 
 
 
 }
+
+
+
 
 
 
