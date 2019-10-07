@@ -1,7 +1,3 @@
-@charset "UTF-8";
-/*字的颜色*/
-/*灰色字的颜色*/
-/*亮粉色*/
 * {
   margin: 0;
   padding: 0;
@@ -9,22 +5,17 @@
 
 #player {
   height: 100vh;
-  /*❗️给界面加个高度，移动端用视口单位 vw、vh。100vh 就可以撑满屏幕；*/
   background: #060a3d;
   overflow: hidden;
 }
 #player .header {
   text-align: center;
-  /*水平居中*/
   height: 110px;
-  /*❗️固定死 header 的高度*/
 }
 #player .header h1 {
   color: #fff;
   font-size: 20px;
   padding-top: 20px;
-  /*❗️注意不能用 margin-top: 20px; 。
-  一旦用了，会产生“外边距”合并问题——产生缝隙！*/
 }
 #player .header p {
   color: #868aaf;
@@ -32,27 +23,19 @@
 }
 #player .header .balls {
   display: flex;
-  /*❗️移动端我们要避免去用“浮动”，要采用 Flex 布局。*/
   justify-content: center;
   align-items: center;
-  /*❗️这两行代码在实战中的“万金油”，
-  用于 Flex 的“水平”、“垂直”居中。*/
   margin-top: 20px;
-  /*整体加一个 margin ，拉开距离。*/
 }
 #player .header .balls span {
   display: block;
-  /*❗️也可以用 display: inline-block; 。
-  span 是行内元素，直接加宽高不起作用！*/
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  /*变为“圆”*/
   background: #6a134f;
   margin: 0 4px;
 }
 #player .header .balls span.current {
-  /*🏆& 是指 span ，这样的写法表示：又是 span，又是 current。*/
   width: 8px;
   height: 8px;
   background: #db3baa;
@@ -156,19 +139,15 @@
 }
 #player .footer .bar-area .time-start {
   order: 1;
-  /*❗️位置放在第一个；*/
   width: 40px;
 }
 #player .footer .bar-area .time-end {
   order: 3;
-  /*❗️位置放在第三个；*/
   width: 40px;
 }
 #player .footer .bar-area .bar {
   order: 2;
-  /*❗️位置放在第二个；*/
   flex: 1;
-  /*❗️自动撑开；*/
   height: 4px;
   background: #0025f1;
   border-radius: 2px;
@@ -178,7 +157,6 @@
   width: 0%;
   transition: all 0.2s;
   height: 100%;
-  /*❗️撑满父亲（因为 .bar 设置了高度 4px，所以这里可以直接 100%）*/
   border-radius: 2px;
   background: #db3baa;
   position: relative;
@@ -192,7 +170,6 @@
   width: 16px;
   height: 16px;
   background: url(/progress.798a5c76.svg) 0 0 no-repeat;
-  /*❗️背景图片的形式*/
   background-size: contain;
 }
 #player .footer .actions {

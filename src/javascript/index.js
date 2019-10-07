@@ -1,9 +1,7 @@
 console.log("Hello, Oli")
 
 import "./icons.js"
-
 import Swiper from "./swiper.js"
-
 
 
 class Player {
@@ -23,27 +21,22 @@ class Player {
 
     this.lyricsArr = []
     this.lyricIndex = -1    
-
   }
 
   
   start() {
-    
-    //1️⃣我们通过 fetch 的方式获取到“数据”：
     fetch("https://qdywxs.github.io/data-mock/qdywxs-music/music-list.json")
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        this.songList = data  //2️⃣然后将“数据”赋值给实例对象的 songList（箭头函数里的 this 指向它上一级的 this）；
-        this.loadSong()  //3️⃣把获取到的“数据”先缓存起来；
+        this.songList = data
+        this.loadSong()
       })
   }
   
   
-  //4️⃣把获取到的数据进行分门别类的“缓存”：
   loadSong() {
-    let songObj = this.songList[this.currentIndex]  /*4️⃣-①：“缓存”当前播放歌曲的所有“数据”信息，
-                                                    并赋值给 songObj；*/
+    let songObj = this.songList[this.currentIndex]
     this.audio.src = songObj.url
 
     this.$(".header h1").innerText = songObj.title
@@ -59,17 +52,17 @@ class Player {
     let self = this
     this.$(".btn-play-pause").onclick = function() {
       if(this.classList.contains("playing")) {
-        self.audio.pause()  //把音乐暂停掉
+        self.audio.pause()
         
-        this.classList.remove("playing")  //移除 playing
-        this.classList.add("pause")  //添加 pause
+        this.classList.remove("playing")
+        this.classList.add("pause")
         
         this.querySelector("use").setAttribute("xlink:href", "#icon-play")
       }else if(this.classList.contains("pause")) {
         self.audio.play()
 
-        this.classList.remove("pause")  //移除 pause
-        this.classList.add("playing")  //添加 playing
+        this.classList.remove("pause")
+        this.classList.add("playing")
         
         this.querySelector("use").setAttribute("xlink:href", "#icon-pause")
         
@@ -109,12 +102,7 @@ class Player {
     })
 
 
-
-    /*❗️音乐播放的过程中，播放器会时刻地触发方法 ontimeupdate 。
-    触发这个方法的时候，我们调用 locateLyric 和 setProgerssBar 方法，
-    去相应地时刻“定位歌词”和设置“进度条”。*/
     this.audio.ontimeupdate = function() {
-
       self.locateLyric()
       self.setProgressBar()
     }    
@@ -132,11 +120,8 @@ class Player {
     fetch(this.songList[this.currentIndex].lyric)
       .then(res => res.json())
       .then(data => {
-        
         console.log(data.lrc.lyric)
-
         this.setLyrics(data.lrc.lyric)
-
         window.lyrics = data.lrc.lyric
       })
   }
@@ -180,10 +165,7 @@ class Player {
   locateLyric() {
     console.log("locateLyric")
 
-
     let currentTime = this.audio.currentTime * 1000
-
-
     let nextLineTime = this.lyricsArr[this.lyricIndex + 1][0]
 
     if(currentTime > nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
@@ -192,10 +174,8 @@ class Player {
       let node = this.$('[data-time="'+this.lyricsArr[this.lyricIndex][0]+'"]')
       if(node) this.setLyricToCenter(node)
 
-
       this.$$(".panel-effect .lyric p")[0].innerText = this.lyricsArr[this.lyricIndex][1]
       this.$$(".panel-effect .lyric p")[1].innerText = this.lyricsArr[this.lyricIndex+1] ? this.lyricsArr[this.lyricIndex+1][1] : ''
-      
     }
   }
 
@@ -214,8 +194,6 @@ class Player {
 
 
 
-
-
   setProgressBar() {
     console.log("set setProgressBar")
 
@@ -224,13 +202,10 @@ class Player {
     console.log(percent)
 
     this.$(".bar .progress").style.width = percent
-
     this.$(".time-start").innerText = this.formateTime(this.audio.currentTime)
 
     console.log(this.$(".bar .progress").style.width)
   }
-
-
 
 
 
@@ -243,7 +218,6 @@ class Player {
     
     return minutes + ":" + seconds
   }
-
 
 
 }

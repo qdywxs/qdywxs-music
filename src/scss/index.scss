@@ -1,7 +1,7 @@
 $backgroundColor: #060a3d;
-$color: #fff;  /*字的颜色*/
-$color1: #868aaf;  /*灰色字的颜色*/
-$color2: #db3baa;  /*亮粉色*/
+$color: #fff;
+$color1: #868aaf;
+$color2: #db3baa;
 
 $color2-dark: darken($color2, 10%);
 $color2-darker: darken($color2, 30%);
@@ -15,18 +15,17 @@ $color3: #0025f1;
 
 
 #player {
-  height: 100vh;  /*❗️给界面加个高度，移动端用视口单位 vw、vh。100vh 就可以撑满屏幕；*/
+  height: 100vh;
   background: $backgroundColor;
   overflow: hidden;
   
   .header {
-    text-align: center;  /*水平居中*/
-    height: 110px;  /*❗️固定死 header 的高度*/
+    text-align: center;
+    height: 110px;
     h1 {
       color: $color;
       font-size: 20px;
-      padding-top: 20px;  /*❗️注意不能用 margin-top: 20px; 。
-                          一旦用了，会产生“外边距”合并问题——产生缝隙！*/
+      padding-top: 20px;
     }
     
     p {
@@ -35,24 +34,20 @@ $color3: #0025f1;
     }
     
     .balls {
-      display: flex;  /*❗️移动端我们要避免去用“浮动”，要采用 Flex 布局。*/
-      
+      display: flex;
       justify-content: center;
-      align-items: center;  /*❗️这两行代码在实战中的“万金油”，
-                            用于 Flex 的“水平”、“垂直”居中。*/
-      
-      margin-top: 20px;  /*整体加一个 margin ，拉开距离。*/
+      align-items: center;
+      margin-top: 20px;
       
       span {
-        display: block;  /*❗️也可以用 display: inline-block; 。
-                         span 是行内元素，直接加宽高不起作用！*/
+        display: block;
         width: 5px;
         height: 5px;
-        border-radius: 50%;  /*变为“圆”*/
+        border-radius: 50%;
         background: $color2-darker;
         margin: 0 4px;
 
-        &.current {  /*🏆& 是指 span ，这样的写法表示：又是 span，又是 current。*/
+        &.current {
           width: 8px;
           height: 8px;
           background: $color2;
@@ -142,7 +137,6 @@ $color3: #0025f1;
       .container {
         transition: all .4s;
 
-
         p {
           color: $color1;
           line-height: 2;
@@ -180,18 +174,18 @@ $color3: #0025f1;
       align-items: center;
       
       .time-start {
-        order: 1;  /*❗️位置放在第一个；*/
+        order: 1;
         width: 40px;
       }
       
       .time-end {
-        order: 3;  /*❗️位置放在第三个；*/
+        order: 3;
         width: 40px;
       }
       
       .bar {
-        order: 2;  /*❗️位置放在第二个；*/
-        flex: 1;  /*❗️自动撑开；*/
+        order: 2;
+        flex: 1;
         height: 4px;
         background: $color3;
         border-radius: 2px;
@@ -200,7 +194,7 @@ $color3: #0025f1;
         .progress {
           width: 0%;
           transition: all .2s;
-          height: 100%;  /*❗️撑满父亲（因为 .bar 设置了高度 4px，所以这里可以直接 100%）*/
+          height: 100%;
           border-radius: 2px;
           background: $color2;
           position: relative;
@@ -213,7 +207,7 @@ $color3: #0025f1;
             display: block;
             width: 16px;
             height: 16px;
-            background: url(../svg/progress.svg) 0 0 no-repeat;  /*❗️背景图片的形式*/
+            background: url(../svg/progress.svg) 0 0 no-repeat;
             background-size: contain;
           }
         }

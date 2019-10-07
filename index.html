@@ -2,18 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <!--❗️由于是移动端项目，所以下边这行代码不能少！-->
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  
   <title>qdywxs-music</title>
   <link rel="stylesheet" href="src/scss/index.scss">
 </head>
 <body>
-  <div id="player">  <!--1️⃣这里我们单独用 div 包裹以下，并标明这是一个“播放器”。
-                     因为有可能当前页面还会有其他大区块；-->
+  <div id="player">
       
-    <div class="header">   <!--2️⃣这里是“头部”——对应上边的“注释①”；-->
+    <div class="header">
       <h1>后来的我们</h1>
       <p>五月天-后来的我们</p>
       <div class="balls">
@@ -22,10 +18,9 @@
       </div>
     </div>
 
-    <div class="panels panel1">  <!--3️⃣这里是面板部分——对应上边的“注释②、③”，
-                                   由于是两个面板，初始默认为 panel1；-->
+    <div class="panels panel1">
       
-      <div class="panel-effect">  <!--3️⃣-①：滑动前的面板；-->
+      <div class="panel-effect">
         <div class="effect">
           <div class="effect-1"></div>
           <div class="effect-2"></div>
@@ -37,35 +32,16 @@
         </div>
       </div>
 
-      <div class="panel-lyrics">  <!--3️⃣-②：滑动后，显示的详细“歌词”面板；-->
+      <div class="panel-lyrics">
         <div class="container">
-     <!-- <p>1作曲：怪兽</p>
-          <p>2作词：阿信</p>
-          <p>3然后呢</p>
-          <p>4他们说你的心 似乎痊愈了</p>
-          <p>5也开始有个人 为你守候着</p>
-          <p>6我该心安或是 心痛呢</p>
-          <p>7然后呢</p>
-          <p>8其实我的日子 也还可以呢</p>
-          <p>9除了回忆肆虐 的某些时刻</p>
-          <p>10庆幸还有眼泪 冲淡苦涩</p>
-          <p>11而那些昨日 依然缤纷着</p>
-          <p class="current">12它们都有我 细心收藏着</p>
-          <p>13也许你还记得 也许你都忘了</p>
-          <p>14也不是那么 重要了</p>
-          <p>15只期待 后来的你 能快乐</p>
-          <p>16那就是 后来的我 最想的</p>
-          <p>17后来的我们 依然走着</p>
-          <p>18只是不再并肩了</p> -->
         </div>        
       </div>  
      
     </div>
     
-    <div class="footer">  <!--4️⃣页面剩余的部分，我们都可以看成“页面底部 footer”——对应上边
-                          的“注释④、⑤、⑥”；-->
+    <div class="footer">
 
-      <div class="buttons">  <!--4️⃣-①：这是一行 SVG 图片，对应上边的“注释④”；-->
+      <div class="buttons">
         <svg class="btn-like" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-like"/></svg>
 
         <svg class="btn-download" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-download"/></svg>
@@ -76,7 +52,7 @@
       </div>  
       
 
-      <div class="bar-area">  <!--4️⃣-②：播放进度条，对应“注释⑤”；-->
+      <div class="bar-area">
         <span class="time-start">00:00</span>
         <span class="time-end">00:00</span>
         
@@ -86,7 +62,7 @@
       </div>  
 
 
-      <div class="actions">   <!--4️⃣-③：操作按钮，对应“注释⑥”。-->
+      <div class="actions">
         <svg class="btn-order" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-circle"/></svg>
 
         <svg class="btn-pre" xmlns:xlink="http://www.w3.org/1999/xlink"  aria-hidden="true"><use xlink:href="#icon-pre"/></svg>

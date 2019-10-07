@@ -1,13 +1,12 @@
-let  svgPlaceholder = document.createElement("div")  //1️⃣创建一个 div；
+let  svgPlaceholder = document.createElement("div")
 
 svgPlaceholder.style.position="absolute"  
 svgPlaceholder.style.width = 0 
 svgPlaceholder.style.height = 0 
-svgPlaceholder.style.overflow = "hidden"  //2️⃣这四行代码给这个 div 设置一些样式，使其“看不见”；
+svgPlaceholder.style.overflow = "hidden"
 
-document.body.appendChild(svgPlaceholder)  //3️⃣将 div 放入 body；
+document.body.appendChild(svgPlaceholder)
 
-//4️⃣🏆` ` 里边放置 buttons.svg 里的所有代码！
 svgPlaceholder.innerHTML = `
 
 <?xml version="1.0" encoding="UTF-8"?>
