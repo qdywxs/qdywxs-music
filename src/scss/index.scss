@@ -18,7 +18,7 @@ $color3: #0025f1;
   height: 100vh;
   background: $backgroundColor;
   overflow: hidden;
-  
+
   .header {
     text-align: center;
     height: 110px;
@@ -27,18 +27,18 @@ $color3: #0025f1;
       font-size: 20px;
       padding-top: 20px;
     }
-    
+
     p {
       color: $color1;
       font-size: 12px;
     }
-    
+
     .balls {
       display: flex;
       justify-content: center;
       align-items: center;
       margin-top: 20px;
-      
+
       span {
         display: block;
         width: 5px;
@@ -53,7 +53,7 @@ $color3: #0025f1;
           background: $color2;
         }
       }
-      
+
     }
   }
 
@@ -62,7 +62,7 @@ $color3: #0025f1;
     width: 200vw;
     height: calc(100vh - 270px);
     display: flex;
-    
+
     transition: transform 0.3s;
     align-items: center;
 
@@ -157,7 +157,7 @@ $color3: #0025f1;
     .buttons {
       display: flex;
       justify-content: center;
-  
+
       svg {
         width: 24px;
         height: 24px;
@@ -172,17 +172,17 @@ $color3: #0025f1;
       padding: 0 20px;
       margin-top: 20px;
       align-items: center;
-      
+
       .time-start {
         order: 1;
         width: 40px;
       }
-      
+
       .time-end {
         order: 3;
         width: 40px;
       }
-      
+
       .bar {
         order: 2;
         flex: 1;
@@ -190,7 +190,7 @@ $color3: #0025f1;
         background: $color3;
         border-radius: 2px;
         margin: 0 10px;
-        
+
         .progress {
           width: 0%;
           transition: all .2s;
@@ -198,7 +198,7 @@ $color3: #0025f1;
           border-radius: 2px;
           background: $color2;
           position: relative;
-  
+
           &::after {
             content: '';
             position: absolute;
@@ -212,7 +212,7 @@ $color3: #0025f1;
           }
         }
       }
-    }    
+    }
 
     .actions {
       display: flex;
@@ -220,19 +220,19 @@ $color3: #0025f1;
       justify-content: space-between;
       margin-top: 20px;
       padding: 0 20px;
-  
+
       svg {
         width: 28px;
         height: 28px;
-  
+
         &.btn-play-pause {
           width: 50px;
-          height: 50px;       
+          height: 50px;
         }
       }
     }
 
-  }  
+  }
 
 }
 

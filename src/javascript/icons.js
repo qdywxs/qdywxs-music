@@ -59,7 +59,7 @@ svgPlaceholder.innerHTML = `
 
 <?xml version="1.0" encoding="UTF-8"?>
 <svg>
-<symbol id="icon-circle" width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<symbol id="icon-circle" width="28px" height="28px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
     <title>循环模式</title>
     <desc>Created with Sketch.</desc>
@@ -112,7 +112,7 @@ svgPlaceholder.innerHTML = `
 </symbol> 
 
 
-<symbol id="icon-pre" width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<symbol id="icon-pre" width="28px" height="28px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
     <title>上一首</title>
     <desc>Created with Sketch.</desc>
@@ -166,7 +166,7 @@ svgPlaceholder.innerHTML = `
 </symbol>
 
 
-<symbol id="icon-play" width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<symbol id="icon-play" width="50px" height="50px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
     <title>图-资源 14</title>
     <desc>Created with Sketch.</desc>
@@ -228,7 +228,7 @@ svgPlaceholder.innerHTML = `
 
 
 
-<symbol id="icon-pause" width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<symbol id="icon-pause" width="50px" height="50px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
     <title>图-资源 14 copy</title>
     <desc>Created with Sketch.</desc>
@@ -292,7 +292,7 @@ svgPlaceholder.innerHTML = `
 
 
 
-<symbol id="icon-next" width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<symbol id="icon-next" width="28px" height="28px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
     <title>下一首</title>
     <desc>Created with Sketch.</desc>
@@ -344,7 +344,7 @@ svgPlaceholder.innerHTML = `
 </symbol>
 
 
-<symbol id="icon-list" width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<symbol id="icon-list" width="28px" height="28px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
     <title>音乐</title>
     <desc>Created with Sketch.</desc>

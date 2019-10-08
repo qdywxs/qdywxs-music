@@ -7,23 +7,23 @@ import Swiper from "./swiper.js"
 class Player {
   constructor(node) {
     this.root = typeof node === "string" ? document.querySelector(node) : node
-    
+
     this.$ = selector => this.root.querySelector(selector)
     this.$$ = selector => this.root.querySelectorAll(selector)
-    
+
     this.songList = []
     this.currentIndex = 1
-    
+
     this.audio = new Audio()
 
     this.start()
     this.bind()
 
     this.lyricsArr = []
-    this.lyricIndex = -1    
+    this.lyricIndex = -1
   }
 
-  
+
   start() {
     fetch("https://qdywxs.github.io/data-mock/qdywxs-music/music-list.json")
       .then(res => res.json())
@@ -33,8 +33,8 @@ class Player {
         this.loadSong()
       })
   }
-  
-  
+
+
   loadSong() {
     let songObj = this.songList[this.currentIndex]
     this.audio.src = songObj.url
@@ -43,8 +43,8 @@ class Player {
     this.$(".header p").innerText = songObj.author + "-" + songObj.album
 
     this.audio.onloadedmetadata = () => this.$('.time-end').innerText = this.formateTime(this.audio.duration)
-    
-    this.loadLyric() 
+
+    this.loadLyric()
   }
 
 
@@ -53,19 +53,19 @@ class Player {
     this.$(".btn-play-pause").onclick = function() {
       if(this.classList.contains("playing")) {
         self.audio.pause()
-        
+
         this.classList.remove("playing")
         this.classList.add("pause")
-        
+
         this.querySelector("use").setAttribute("xlink:href", "#icon-play")
       }else if(this.classList.contains("pause")) {
         self.audio.play()
 
         this.classList.remove("pause")
         this.classList.add("playing")
-        
+
         this.querySelector("use").setAttribute("xlink:href", "#icon-pause")
-        
+
       }
 
     }
@@ -87,7 +87,7 @@ class Player {
 
 
     let swiper = new Swiper(this.$(".panels"))
-    
+
     swiper.on("swipLeft", function() {
       this.classList.remove("panel1")
       this.classList.add("panel2")
@@ -105,7 +105,7 @@ class Player {
     this.audio.ontimeupdate = function() {
       self.locateLyric()
       self.setProgressBar()
-    }    
+    }
 
   }
 
@@ -170,7 +170,7 @@ class Player {
 
     if(currentTime > nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
       this.lyricIndex++
-      
+
       let node = this.$('[data-time="'+this.lyricsArr[this.lyricIndex][0]+'"]')
       if(node) this.setLyricToCenter(node)
 
@@ -188,7 +188,7 @@ class Player {
     translateY = translateY > 0 ? translateY : 0
     this.$(".panel-lyrics .container").style.transform = `translateY(-${translateY}px)`
     this.$$(".panel-lyrics p").forEach(node => node.classList.remove("current"))
-    
+
     node.classList.add("current")
   }
 
@@ -198,7 +198,7 @@ class Player {
     console.log("set setProgressBar")
 
     let percent = (this.audio.currentTime * 100 /this.audio.duration) + "%"
-    
+
     console.log(percent)
 
     this.$(".bar .progress").style.width = percent
@@ -212,10 +212,10 @@ class Player {
   formateTime(secondsTotal) {
     let minutes = parseInt(secondsTotal/60)
     minutes = minutes >= 10 ? "" + minutes : "0" + minutes
-    
+
     let seconds = parseInt(secondsTotal%60)
     seconds = seconds >= 10 ? "" + seconds : "0" + seconds
-    
+
     return minutes + ":" + seconds
   }
 
